@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import userModel from "../models/user.js"
+import userModel from "../models/User.js"
 import sendEmail from '../utilities/sendEmail.js'
 import OTPModel from "../models/Otp.js"
 

@@ -6,8 +6,15 @@ import helmet from 'helmet';
 import cors from 'cors';
 import hpp from 'hpp';
 import { connect } from 'mongoose';
+import * as path from "path";
+import { fileURLToPath } from 'url';
+
+
+
 
 const app=new express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Middleware
 
@@ -22,7 +29,7 @@ app.use(limiter);
 // MongoDB connection
 
 let URL="mongodb+srv://rifat:1234@cluster0.jz0ux.mongodb.net/ClassTest"
-let Option={user:'',pass:'',autoIndex:true}
+let Option={autoIndex: true}
 connect(URL,Option).then(()=>{
     console.log("Database Connected")
 }).catch((err)=>{
@@ -39,7 +46,7 @@ app.use(express.static('client/dist'));
 
 // Serve React front end for all routes not handled by the API
 app.get(/(.*)/, (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client' , 'dist', 'index.html'));
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 });
 
 export default app;
